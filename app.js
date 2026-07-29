@@ -167,7 +167,7 @@ const DB = new AttendanceDB();
    ========================================================================== */
 
 function initTheme() {
-    const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME) || 'light-theme';
+    const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME) || 'dark-theme';
     document.body.className = savedTheme;
     
     const themeBtn = document.getElementById('theme-toggle');
