@@ -614,12 +614,12 @@ input, select, button, textarea {
     background-color: var(--bg-surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
-    padding: 24px;
+    padding: 16px 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: left;
     gap: 16px;
     box-shadow: var(--shadow-sm);
     transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-normal), border-color var(--transition-normal);
@@ -631,9 +631,10 @@ input, select, button, textarea {
 }
 
 .rate-radial {
-    width: 110px;
-    height: 110px;
+    width: 60px;
+    height: 60px;
     position: relative;
+    flex-shrink: 0;
 }
 
 .radial-svg {
@@ -672,8 +673,8 @@ input, select, button, textarea {
 .rate-info p {
     font-size: 0.8rem;
     color: var(--text-secondary);
-    max-width: 180px;
-    margin: 0 auto;
+    max-width: 220px;
+    margin: 0;
 }
 
 /* Trend History Card */
