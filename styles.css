@@ -1579,6 +1579,7 @@ button:active {
 @media (max-width: 768px) {
     .app-layout {
         grid-template-columns: 1fr;
+        height: 100dvh;
     }
     
     .sidebar {
@@ -1621,8 +1622,9 @@ button:active {
     }
     
     .scrollable-container {
-        padding: 16px;
+        padding: 16px 16px 80px 16px;
         gap: 16px;
+        -webkit-overflow-scrolling: touch;
     }
     
     .toolbar {
