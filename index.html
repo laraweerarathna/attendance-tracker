@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTP - SriPalee National College</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-theme">
+    <!-- Main App Container -->
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <span class="logo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </span>
+                    <h2>RTP - SriPalee National College</h2>
+                </div>
+                <button class="sidebar-toggle-btn" id="sidebar-close-btn" aria-label="Close sidebar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="session-section">
+                    <div class="section-header">
+                        <h3>SESSIONS</h3>
+                        <button class="icon-btn small-btn" onclick="openModal('add-session-modal')" title="Add Session">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                    
+                    <div class="search-sessions-box">
+                        <input type="text" id="session-search" placeholder="Search sessions..." autocomplete="off">
+                    </div>
+                    
+                    <ul class="session-list" id="session-list-container">
+                        <!-- Sessions dynamically loaded here -->
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="sidebar-action-btn" onclick="openModal('backup-modal')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <span>Backup & Export</span>
+                </button>
+                <button class="sidebar-action-btn" onclick="openModal('settings-modal')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    <span>Configure App</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Mobile Header overlay toggler -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Navbar -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="sidebar-toggle-btn mobile-only" id="sidebar-open-btn" aria-label="Open sidebar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    </button>
+                    <div class="navbar-title">
+                        <h1 id="active-session-title">Session Title</h1>
+                        <p id="active-session-meta">Loading details...</p>
+                    </div>
+                </div>
+                
+                <div class="navbar-right">
+                    <!-- History Undo/Redo Buttons -->
+                    <div class="history-controls">
+                        <button class="icon-btn" id="undo-btn" onclick="undo()" title="Undo (Ctrl+Z)" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+                        </button>
+                        <button class="icon-btn" id="redo-btn" onclick="redo()" title="Redo (Ctrl+Y)" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Theme">
+                        <span class="theme-icon-light">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        </span>
+                        <span class="theme-icon-dark">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </span>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Dashboard Scroll Area -->
+            <div class="scrollable-container">
+                
+                <!-- Overview Stats & Chart Grid -->
+                <section class="dashboard-grid">
+                    
+                    <!-- Numeric Stats Cards -->
+                    <div class="stats-overview-cards">
+                        <div class="overview-card total">
+                            <div class="card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-label">Total Members</span>
+                                <h3 id="stat-total-count">0</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="overview-card present">
+                            <div class="card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-label">Present</span>
+                                <h3 id="stat-present-count">0</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="overview-card absent">
+                            <div class="card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="9" x2="22" y2="13"/><line x1="22" y1="9" x2="18" y2="13"/></svg>
+                            </div>
+                            <div class="card-info">
+                                <span class="card-label">Absent</span>
+                                <h3 id="stat-absent-count">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Circular Rate Visualizer -->
+                    <div class="rate-card">
+                        <div class="rate-radial">
+                            <svg class="radial-svg" viewBox="0 0 36 36">
+                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="circle-fill" id="radial-progress" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <text x="18" y="20.35" class="circle-percentage" id="radial-percentage">0%</text>
+                            </svg>
+                        </div>
+                        <div class="rate-info">
+                            <h4>Attendance Rate</h4>
+                            <p>Average presence across this session's categories.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Attendance Trend History Card -->
+                    <div class="trend-card">
+                        <div class="trend-header">
+                            <h4>Attendance Trend</h4>
+                            <p>Rate (%) changes over recent sessions</p>
+                        </div>
+                        <div class="trend-chart-wrapper" id="trend-chart-container">
+                            <!-- SVG Chart rendered here by JS -->
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Main Search and Quick Action Toolbar -->
+                <section class="toolbar">
+                    <div class="search-box">
+                        <span class="search-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        </span>
+                        <input type="text" id="search-input" placeholder="Search for a member..." autocomplete="off">
+                    </div>
+                    
+                    <div class="toolbar-actions">
+                        <button class="secondary-btn" id="bulk-present-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Mark All Present</span>
+                        </button>
+                        <button class="secondary-btn" id="bulk-absent-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            <span>Clear All</span>
+                        </button>
+                        <button class="primary-btn" onclick="openModal('add-member-modal')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            <span>Add Member</span>
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Categories Lists Grid -->
+                <section class="lists-container" id="lists-container">
+                    <!-- Categories lists loaded dynamically by JS -->
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODALS & DIALOGS -->
+    <!-- ============================================== -->
+    
+    <!-- Modal Backdrop Overlay -->
+    <div class="modal-backdrop" id="modal-backdrop" onclick="closeAllModals()"></div>
+
+    <!-- 1. Add Session Modal -->
+    <div class="modal" id="add-session-modal">
+        <div class="modal-header">
+            <h3>Create New Session</h3>
+            <button class="close-btn" onclick="closeModal('add-session-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="new-session-name">Session Name / Date</label>
+                <input type="text" id="new-session-name" placeholder="e.g. August 1 (Saturday) or Session #3" autocomplete="off">
+            </div>
+            <div class="checkbox-group-modal">
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" id="copy-members-option" checked>
+                    <span class="checkbox-checkmark"></span>
+                    <span class="checkbox-label">Copy members from current session</span>
+                </label>
+            </div>
+            <div class="alert-info-box">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span>Members will be copied, but their attendance markers will start as absent.</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('add-session-modal')">Cancel</button>
+            <button class="btn btn-primary" onclick="createSessionAction()">Create Session</button>
+        </div>
+    </div>
+
+    <!-- 2. Add Member Modal -->
+    <div class="modal" id="add-member-modal">
+        <div class="modal-header">
+            <h3>Add New Member</h3>
+            <button class="close-btn" onclick="closeModal('add-member-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="new-member-name-input">Member Name</label>
+                <input type="text" id="new-member-name-input" placeholder="Full name of member" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="new-member-category-select">Category</label>
+                <select id="new-member-category-select">
+                    <!-- Loaded dynamically -->
+                </select>
+            </div>
+            <div class="checkbox-group-modal">
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" id="add-global-option" checked>
+                    <span class="checkbox-checkmark"></span>
+                    <span class="checkbox-label">Add to all existing sessions</span>
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('add-member-modal')">Cancel</button>
+            <button class="btn btn-primary" onclick="addMemberAction()">Add Member</button>
+        </div>
+    </div>
+
+    <!-- 3. Edit Member Modal -->
+    <div class="modal" id="edit-member-modal">
+        <div class="modal-header">
+            <h3>Edit Member Profile</h3>
+            <button class="close-btn" onclick="closeModal('edit-member-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="edit-member-old-name">
+            <input type="hidden" id="edit-member-old-category">
+            <div class="form-group">
+                <label for="edit-member-name-input">Rename Member</label>
+                <input type="text" id="edit-member-name-input" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="edit-member-category-select">Change Category</label>
+                <select id="edit-member-category-select">
+                    <!-- Dynamic categories select options -->
+                </select>
+            </div>
+            <div class="checkbox-group-modal">
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" id="edit-global-option" checked>
+                    <span class="checkbox-checkmark"></span>
+                    <span class="checkbox-label">Apply changes across all sessions</span>
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-danger-link" onclick="deleteMemberAction()">Delete Member</button>
+            <div class="modal-footer-right">
+                <button class="btn btn-secondary" onclick="closeModal('edit-member-modal')">Cancel</button>
+                <button class="btn btn-primary" onclick="saveMemberEditAction()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Backup & Export Modal -->
+    <div class="modal" id="backup-modal">
+        <div class="modal-header">
+            <h3>Backup & Data Exporter</h3>
+            <button class="close-btn" onclick="closeModal('backup-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-desc">Manage your attendance records database. Export files for Excel, or save backups to restore later.</p>
+            
+            <div class="backup-section-box">
+                <h4>1. Export Database Records</h4>
+                <p>Download your complete dataset, including all sessions, categories, and attendance flags.</p>
+                <div class="export-actions-row">
+                    <button class="btn btn-outline" onclick="exportDataJSON()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <span>Download JSON (Backup)</span>
+                    </button>
+                    <button class="btn btn-outline" onclick="exportDataCSV()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        <span>Export CSV (Spreadsheet)</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="backup-section-box">
+                <h4>2. Import / Restore Database</h4>
+                <p>Upload a previously exported JSON backup file to restore all session data. This will overwrite current workspace data.</p>
+                <div class="import-area">
+                    <label class="file-dropzone" for="import-file-input">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        <span class="primary-text">Click to browse backup file</span>
+                        <span class="secondary-text">Only supports .json files</span>
+                        <input type="file" id="import-file-input" accept=".json" style="display:none" onchange="importDataJSON(event)">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeModal('backup-modal')">Done</button>
+        </div>
+    </div>
+
+    <!-- 5. Settings / Configuration Modal -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-header">
+            <h3>Configure Workspace Categories</h3>
+            <button class="close-btn" onclick="closeModal('settings-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="settings-section">
+                <h4>Manage Attendance Categories</h4>
+                <p class="section-desc">Create or delete categories. Modifying categories applies to the whole application.</p>
+                
+                <div class="add-category-inline">
+                    <input type="text" id="new-category-name" placeholder="Category name..." autocomplete="off">
+                    <button class="primary-btn" onclick="addCategoryAction()">Add</button>
+                </div>
+                
+                <ul class="categories-list-settings" id="categories-settings-list">
+                    <!-- Loaded dynamically by JS -->
+                </ul>
+            </div>
+            
+            <div class="danger-zone-settings">
+                <h4>Danger Zone</h4>
+                <p>Irreversible destructive database operations.</p>
+                <div class="danger-actions">
+                    <button class="btn btn-danger" onclick="confirmResetDatabase()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                        <span>Reset All Data to Default</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('settings-modal')">Close</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Overlay -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

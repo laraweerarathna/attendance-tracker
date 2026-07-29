@@ -1,0 +1,16 @@
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Local history / IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Local backup files
+*.json.bak
