@@ -504,7 +504,7 @@ input, select, button, textarea {
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 3fr 1.2fr;
     gap: 20px;
 }
 
@@ -516,9 +516,15 @@ input, select, button, textarea {
 
 /* Overview cards column */
 .stats-overview-cards {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .stats-overview-cards {
+        grid-template-columns: 1fr;
+    }
 }
 
 .overview-card {
