@@ -519,6 +519,7 @@ input, select, button, textarea {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
+    align-self: center;
 }
 
 @media (max-width: 768px) {
