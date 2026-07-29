@@ -530,12 +530,33 @@ input, select, button, textarea {
     align-items: center;
     gap: 16px;
     box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    user-select: none;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-normal), border-color var(--transition-normal);
 }
 
 .overview-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
+}
+
+/* Active filter highlight state */
+.overview-card.active-filter {
+    border-color: var(--primary);
+    box-opacity: 1;
+    box-shadow: 0 0 0 2px var(--primary-light);
+    transform: translateY(-2px);
+    background-color: var(--bg-surface-hover);
+}
+
+.overview-card.present.active-filter {
+    border-color: var(--success);
+    box-shadow: 0 0 0 2px var(--success-light);
+}
+
+.overview-card.absent.active-filter {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 2px var(--danger-light);
 }
 
 .overview-card .card-icon {

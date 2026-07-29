@@ -107,7 +107,7 @@
                     
                     <!-- Numeric Stats Cards -->
                     <div class="stats-overview-cards">
-                        <div class="overview-card total">
+                        <div class="overview-card total active-filter" id="card-filter-total" onclick="setAttendanceFilter('all')">
                             <div class="card-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             </div>
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                         
-                        <div class="overview-card present">
+                        <div class="overview-card present" id="card-filter-present" onclick="setAttendanceFilter('present')">
                             <div class="card-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
                             </div>
@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         
-                        <div class="overview-card absent">
+                        <div class="overview-card absent" id="card-filter-absent" onclick="setAttendanceFilter('absent')">
                             <div class="card-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="9" x2="22" y2="13"/><line x1="22" y1="9" x2="18" y2="13"/></svg>
                             </div>

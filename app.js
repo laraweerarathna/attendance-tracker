@@ -555,6 +555,45 @@ function renderTrendChart() {
     `;
 }
 
+let activeAttendanceFilter = 'all';
+
+function setAttendanceFilter(filterType) {
+    if (filterType !== 'all' && activeAttendanceFilter === filterType) {
+        activeAttendanceFilter = 'all';
+    } else {
+        activeAttendanceFilter = filterType;
+    }
+    
+    const totalCard = document.getElementById('card-filter-total');
+    const presentCard = document.getElementById('card-filter-present');
+    const absentCard = document.getElementById('card-filter-absent');
+    
+    if (totalCard) totalCard.classList.remove('active-filter');
+    if (presentCard) presentCard.classList.remove('active-filter');
+    if (absentCard) absentCard.classList.remove('active-filter');
+    
+    if (activeAttendanceFilter === 'all' && totalCard) {
+        totalCard.classList.add('active-filter');
+    } else if (activeAttendanceFilter === 'present' && presentCard) {
+        presentCard.classList.add('active-filter');
+    } else if (activeAttendanceFilter === 'absent' && absentCard) {
+        absentCard.classList.add('active-filter');
+    }
+    
+    renderLists();
+    
+    let msg = "Showing all members.";
+    let type = "info";
+    if (activeAttendanceFilter === 'present') {
+        msg = "Filtering to show Present members.";
+        type = "success";
+    } else if (activeAttendanceFilter === 'absent') {
+        msg = "Filtering to show Absent members.";
+        type = "warning";
+    }
+    showToast(msg, type);
+}
+
 /* ==========================================================================
    RENDER ATTENDANCE MEMBER CARDS
    ========================================================================== */
@@ -614,10 +653,19 @@ function renderLists() {
         
         members.forEach((member) => {
             const isMatch = !searchQuery || member.name.toLowerCase().includes(searchQuery);
-            if (isMatch) visibleCount++;
+            
+            let presenceMatch = true;
+            if (activeAttendanceFilter === 'present') {
+                presenceMatch = member.present === true;
+            } else if (activeAttendanceFilter === 'absent') {
+                presenceMatch = member.present === false;
+            }
+            
+            const showMember = isMatch && presenceMatch;
+            if (showMember) visibleCount++;
             
             const li = document.createElement('li');
-            li.className = `member-item ${isMatch ? '' : 'hidden'}`;
+            li.className = `member-item ${showMember ? '' : 'hidden'}`;
             
             // Custom checkbox element
             const label = document.createElement('label');
